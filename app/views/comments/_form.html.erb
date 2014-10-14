@@ -1,0 +1,30 @@
+<div class="">
+
+  <% if user_signed_in?  %>
+    <%= simple_form_for @comment, url: picture_comments_path(@picture) do |f| %>
+      <!-- Check if there were any errors saving project task and display them if so -->
+      <% if @comment.errors.any? %>
+        <div id='error_explanation'>
+          <h2><%= pluralize(@comment.errors.count, "error") %> prohibited
+            this comment from being saved:</h2>
+          <ul>
+            <% @comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <!-- Begin rendering the form -->
+      <h4>Add a comment</h4>
+      <div class= 'form-group'>
+        <%= f.input :body, label: false, placeholder: "Enter your comment here", input_html: { rows: 4 } %><br>
+      </div>
+
+      <p>
+        <%= f.submit 'Send', :class => 'button right' %> 
+      </p>
+    <% end %>
+  <% else %>
+    <h3> Sign in to create a comment</h3>
+  <% end %>
+</div>

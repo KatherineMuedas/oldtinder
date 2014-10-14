@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
-  root to: 'visitors#index'
+ 
   devise_for :users
-  resources :users
+
+  resources :users, only: [:show, :index] 
+
+  resources :pictures do
+   resources :comments, only: [:create, :destroy]
+  end  
+    
+  root to: 'pictures#index'
 end
+
+
+
+
